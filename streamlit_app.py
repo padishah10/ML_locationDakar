@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 import json
 from pathlib import Path
 
@@ -15,7 +15,22 @@ from project_paths import (
     MAP_HTML,
     METRICS_JSON,
 )
-from train_modeles_loyer import CATEGORICAL_FEATURES, NUMERIC_FEATURES
+
+NUMERIC_FEATURES = [
+    "Chambres numeriques",
+    "Jours depuis publication",
+    "Annee publication",
+    "Mois publication",
+    "Jour publication",
+    "Latitude",
+    "Longitude",
+]
+
+CATEGORICAL_FEATURES = [
+    "Standing",
+    "Type logement",
+    "Quartier nettoye",
+]
 
 SEGMENT_OPTIONS = {
     "Appartements": {
@@ -62,7 +77,12 @@ def build_prediction_input(df: pd.DataFrame, selected_segment: str) -> pd.DataFr
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        chambres = st.number_input("Nombre de chambres", min_value=1, max_value=15, value=1 if selected_segment == "Chambres" else 3)
+        chambres = st.number_input(
+            "Nombre de chambres",
+            min_value=1,
+            max_value=15,
+            value=1 if selected_segment == "Chambres" else 3,
+        )
         jours = st.number_input("Jours depuis publication", min_value=0, max_value=365, value=7)
         annee = st.number_input("Annee de publication", min_value=2024, max_value=2035, value=2026)
     with col2:
@@ -76,7 +96,11 @@ def build_prediction_input(df: pd.DataFrame, selected_segment: str) -> pd.DataFr
             st.text_input("Type logement", value=type_logement, disabled=True)
         else:
             default_type = "Appartement" if "Appartement" in type_values else (type_values[0] if type_values else "Appartement")
-            type_logement = st.selectbox("Type logement", type_values, index=type_values.index(default_type) if type_values and default_type in type_values else 0)
+            type_logement = st.selectbox(
+                "Type logement",
+                type_values,
+                index=type_values.index(default_type) if type_values and default_type in type_values else 0,
+            )
 
     quartier_row = df[df["Quartier nettoye"] == quartier][["Latitude", "Longitude"]].dropna().head(1)
     latitude = float(quartier_row.iloc[0]["Latitude"]) if not quartier_row.empty else None
@@ -118,7 +142,10 @@ def render_overview(metrics, appartements_df: pd.DataFrame, chambres_df: pd.Data
     chart_df = pd.DataFrame(
         {
             "Segment": ["Appartements", "Chambres"],
-            "Prix median": [appartements_df["Prix numerique"].median(), chambres_df["Prix numerique"].median()],
+            "Prix median": [
+                appartements_df["Prix numerique"].median(),
+                chambres_df["Prix numerique"].median(),
+            ],
         }
     )
     st.bar_chart(chart_df.set_index("Segment"))
@@ -178,7 +205,18 @@ def render_quality(df: pd.DataFrame) -> None:
     st.dataframe(missing_ratio.rename("Taux manquant (%)"), use_container_width=True)
 
     st.subheader("Apercu du dataset global")
-    columns = [column for column in ["Categorie annonce", "Titre", "Quartier nettoye", "Prix numerique", "Standing", "Type logement"] if column in df.columns]
+    columns = [
+        column
+        for column in [
+            "Categorie annonce",
+            "Titre",
+            "Quartier nettoye",
+            "Prix numerique",
+            "Standing",
+            "Type logement",
+        ]
+        if column in df.columns
+    ]
     st.dataframe(df[columns].head(50), use_container_width=True)
 
 
@@ -188,10 +226,18 @@ def main() -> None:
 
     appartements_df = load_dataset(str(APPARTEMENTS_ML_CSV))
     chambres_df = load_dataset(str(CHAMBRES_ML_CSV))
-    global_df = pd.concat([appartements_df.assign(Segment="Appartements"), chambres_df.assign(Segment="Chambres")], ignore_index=True)
+    global_df = pd.concat(
+        [
+            appartements_df.assign(Segment="Appartements"),
+            chambres_df.assign(Segment="Chambres"),
+        ],
+        ignore_index=True,
+    )
     metrics = load_metrics(str(METRICS_JSON))
 
-    tab1, tab2, tab3, tab4 = st.tabs(["Vue d'ensemble", "Prediction", "Carte", "Qualite des donnees"])
+    tab1, tab2, tab3, tab4 = st.tabs(
+        ["Vue d'ensemble", "Prediction", "Carte", "Qualite des donnees"]
+    )
 
     with tab1:
         render_overview(metrics, appartements_df, chambres_df)
@@ -205,4 +251,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
