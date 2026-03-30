@@ -1,6 +1,21 @@
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).resolve().parent
+
+def _find_project_root() -> Path:
+    candidates = [
+        Path(__file__).resolve().parent,
+        Path.cwd(),
+        Path("/mount/src/ml_locationdakar"),
+    ]
+
+    for candidate in candidates:
+        if (candidate / "Fichiers CSV" / "appartements_dakar_ml.csv").exists():
+            return candidate
+
+    return Path(__file__).resolve().parent
+
+
+PROJECT_ROOT = _find_project_root()
 DATA_DIR = PROJECT_ROOT / "Fichiers CSV"
 MODELS_DIR = PROJECT_ROOT / "Modeles"
 METRICS_DIR = PROJECT_ROOT / "Metriques"
