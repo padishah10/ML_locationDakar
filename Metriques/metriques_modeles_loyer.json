@@ -1,0 +1,28 @@
+{
+  "appartements": {
+    "segment": "appartements",
+    "lignes_total": 1461,
+    "lignes_train": 1168,
+    "lignes_test": 293,
+    "mae": 310558.2,
+    "rmse": 493894.42,
+    "r2": 0.5194,
+    "prix_min": 12000,
+    "prix_median": 650000,
+    "prix_max": 4000000,
+    "modele": "modele_appartements.joblib"
+  },
+  "chambres": {
+    "segment": "chambres",
+    "lignes_total": 99,
+    "lignes_train": 79,
+    "lignes_test": 20,
+    "mae": 26503.55,
+    "rmse": 43726.65,
+    "r2": 0.2206,
+    "prix_min": 10000,
+    "prix_median": 17000,
+    "prix_max": 350000,
+    "modele": "modele_chambres.joblib"
+  }
+}
