@@ -1,7 +1,10 @@
-﻿__pycache__/
+__pycache__/
 *.pyc
 *.pyo
 *.pyd
 .ipynb_checkpoints/
 .DS_Store
 Thumbs.db
+# Modeles regeneres par pipeline/train_modeles_loyer.py
+modeles/
+donnees/carte_quartiers_dakar.html

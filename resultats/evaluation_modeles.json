@@ -1,0 +1,358 @@
+{
+  "segment": "appartements",
+  "annonces": 1409,
+  "quartiers": 74,
+  "loyer_median": 700000,
+  "protocole": "validation croisee 5 plis x 3 repetitions",
+  "comparaison_modeles": {
+    "Reference : loyer median global": {
+      "mae": 532181.4219,
+      "rmse": 790774.3112,
+      "r2": -0.0878,
+      "r2_log": -0.0042,
+      "erreur_relative_mediane_pct": 54.179,
+      "part_a_20pct": 18.9023,
+      "mae_ecart_type": 33859.0974,
+      "rmse_ecart_type": 66342.4212,
+      "r2_ecart_type": 0.0263,
+      "r2_log_ecart_type": 0.0059,
+      "erreur_relative_mediane_pct_ecart_type": 1.5177,
+      "part_a_20pct_ecart_type": 2.9621
+    },
+    "Reference : loyer median du quartier": {
+      "mae": 387141.3592,
+      "rmse": 612855.4898,
+      "r2": 0.3462,
+      "r2_log": 0.471,
+      "erreur_relative_mediane_pct": 33.4316,
+      "part_a_20pct": 30.8475,
+      "mae_ecart_type": 30768.5211,
+      "rmse_ecart_type": 66635.9402,
+      "r2_ecart_type": 0.0694,
+      "r2_log_ecart_type": 0.0557,
+      "erreur_relative_mediane_pct_ecart_type": 1.6472,
+      "part_a_20pct_ecart_type": 2.2761
+    },
+    "Regression lineaire (Ridge, log du loyer)": {
+      "mae": 318975.4433,
+      "rmse": 521709.1957,
+      "r2": 0.5248,
+      "r2_log": 0.6955,
+      "erreur_relative_mediane_pct": 27.4499,
+      "part_a_20pct": 36.9533,
+      "mae_ecart_type": 28917.9261,
+      "rmse_ecart_type": 61040.3624,
+      "r2_ecart_type": 0.0673,
+      "r2_log_ecart_type": 0.0228,
+      "erreur_relative_mediane_pct_ecart_type": 1.7667,
+      "part_a_20pct_ecart_type": 2.0825
+    },
+    "Gradient Boosting": {
+      "mae": 302941.5911,
+      "rmse": 494378.91,
+      "r2": 0.5734,
+      "r2_log": 0.7128,
+      "erreur_relative_mediane_pct": 27.1727,
+      "part_a_20pct": 37.3549,
+      "mae_ecart_type": 25301.1498,
+      "rmse_ecart_type": 61694.5449,
+      "r2_ecart_type": 0.0666,
+      "r2_log_ecart_type": 0.0289,
+      "erreur_relative_mediane_pct_ecart_type": 1.1634,
+      "part_a_20pct_ecart_type": 2.2076
+    },
+    "Random Forest (modele retenu)": {
+      "mae": 305157.8617,
+      "rmse": 499517.7394,
+      "r2": 0.564,
+      "r2_log": 0.6976,
+      "erreur_relative_mediane_pct": 26.0461,
+      "part_a_20pct": 38.7989,
+      "mae_ecart_type": 28503.3727,
+      "rmse_ecart_type": 64532.5938,
+      "r2_ecart_type": 0.074,
+      "r2_log_ecart_type": 0.0348,
+      "erreur_relative_mediane_pct_ecart_type": 1.2866,
+      "part_a_20pct_ecart_type": 1.9176
+    }
+  },
+  "ablation": {
+    "Modele retenu (chambres, type, standing, quartier, coordonnees)": {
+      "mae": 305157.8617,
+      "rmse": 499517.7394,
+      "r2": 0.564,
+      "r2_log": 0.6976,
+      "erreur_relative_mediane_pct": 26.0461,
+      "part_a_20pct": 38.7989,
+      "mae_ecart_type": 28503.3727,
+      "rmse_ecart_type": 64532.5938,
+      "r2_ecart_type": 0.074,
+      "r2_log_ecart_type": 0.0348,
+      "erreur_relative_mediane_pct_ecart_type": 1.2866,
+      "part_a_20pct_ecart_type": 1.9176
+    },
+    "+ dates de publication (configuration d'origine)": {
+      "mae": 319122.5178,
+      "rmse": 526236.0966,
+      "r2": 0.5171,
+      "r2_log": 0.6736,
+      "erreur_relative_mediane_pct": 26.5952,
+      "part_a_20pct": 38.3503,
+      "mae_ecart_type": 28682.2656,
+      "rmse_ecart_type": 64030.8633,
+      "r2_ecart_type": 0.0702,
+      "r2_log_ecart_type": 0.0383,
+      "erreur_relative_mediane_pct_ecart_type": 1.8912,
+      "part_a_20pct_ecart_type": 2.8198
+    },
+    "Sans coordonnees GPS (quartier seul)": {
+      "mae": 311993.6651,
+      "rmse": 513029.2655,
+      "r2": 0.5411,
+      "r2_log": 0.6701,
+      "erreur_relative_mediane_pct": 27.1143,
+      "part_a_20pct": 37.6173,
+      "mae_ecart_type": 29236.6827,
+      "rmse_ecart_type": 60578.953,
+      "r2_ecart_type": 0.0618,
+      "r2_log_ecart_type": 0.0312,
+      "erreur_relative_mediane_pct_ecart_type": 1.8645,
+      "part_a_20pct_ecart_type": 2.7714
+    },
+    "Sans nom de quartier (coordonnees seules)": {
+      "mae": 305202.2812,
+      "rmse": 499187.2758,
+      "r2": 0.5646,
+      "r2_log": 0.6971,
+      "erreur_relative_mediane_pct": 26.333,
+      "part_a_20pct": 38.8938,
+      "mae_ecart_type": 27960.8019,
+      "rmse_ecart_type": 63833.5514,
+      "r2_ecart_type": 0.0729,
+      "r2_log_ecart_type": 0.035,
+      "erreur_relative_mediane_pct_ecart_type": 1.2535,
+      "part_a_20pct_ecart_type": 2.0156
+    },
+    "Sans aucune localisation": {
+      "mae": 417639.2262,
+      "rmse": 642340.6223,
+      "r2": 0.281,
+      "r2_log": 0.4277,
+      "erreur_relative_mediane_pct": 38.0281,
+      "part_a_20pct": 27.3255,
+      "mae_ecart_type": 30340.4335,
+      "rmse_ecart_type": 59447.5524,
+      "r2_ecart_type": 0.0567,
+      "r2_log_ecart_type": 0.0316,
+      "erreur_relative_mediane_pct_ecart_type": 2.9332,
+      "part_a_20pct_ecart_type": 3.3798
+    },
+    "Localisation seule": {
+      "mae": 383399.6676,
+      "rmse": 611314.3562,
+      "r2": 0.3502,
+      "r2_log": 0.5048,
+      "erreur_relative_mediane_pct": 33.6361,
+      "part_a_20pct": 29.4532,
+      "mae_ecart_type": 31137.9201,
+      "rmse_ecart_type": 68324.2588,
+      "r2_ecart_type": 0.0664,
+      "r2_log_ecart_type": 0.045,
+      "erreur_relative_mediane_pct_ecart_type": 1.6716,
+      "part_a_20pct_ecart_type": 1.9842
+    },
+    "Sans standing": {
+      "mae": 307190.7058,
+      "rmse": 500763.7467,
+      "r2": 0.5621,
+      "r2_log": 0.6907,
+      "erreur_relative_mediane_pct": 26.3919,
+      "part_a_20pct": 37.9477,
+      "mae_ecart_type": 28308.7232,
+      "rmse_ecart_type": 62963.4352,
+      "r2_ecart_type": 0.0704,
+      "r2_log_ecart_type": 0.0345,
+      "erreur_relative_mediane_pct_ecart_type": 1.4436,
+      "part_a_20pct_ecart_type": 1.7781
+    },
+    "Sans type de logement": {
+      "mae": 308702.6422,
+      "rmse": 503747.3393,
+      "r2": 0.557,
+      "r2_log": 0.6962,
+      "erreur_relative_mediane_pct": 27.0847,
+      "part_a_20pct": 38.0421,
+      "mae_ecart_type": 28470.8609,
+      "rmse_ecart_type": 65362.665,
+      "r2_ecart_type": 0.0735,
+      "r2_log_ecart_type": 0.0354,
+      "erreur_relative_mediane_pct_ecart_type": 1.1641,
+      "part_a_20pct_ecart_type": 2.4665
+    },
+    "Sans nombre de chambres": {
+      "mae": 342866.8576,
+      "rmse": 551640.9757,
+      "r2": 0.4704,
+      "r2_log": 0.6194,
+      "erreur_relative_mediane_pct": 29.2303,
+      "part_a_20pct": 34.6348,
+      "mae_ecart_type": 26168.855,
+      "rmse_ecart_type": 59969.1322,
+      "r2_ecart_type": 0.054,
+      "r2_log_ecart_type": 0.0355,
+      "erreur_relative_mediane_pct_ecart_type": 2.0661,
+      "part_a_20pct_ecart_type": 3.3105
+    }
+  },
+  "importance_permutation": {
+    "Latitude": {
+      "baisse_r2": 0.5462,
+      "ecart_type": 0.0915
+    },
+    "Chambres numeriques": {
+      "baisse_r2": 0.415,
+      "ecart_type": 0.0518
+    },
+    "Longitude": {
+      "baisse_r2": 0.1975,
+      "ecart_type": 0.0274
+    },
+    "Type logement": {
+      "baisse_r2": 0.0402,
+      "ecart_type": 0.0187
+    },
+    "Quartier nettoye": {
+      "baisse_r2": 0.0225,
+      "ecart_type": 0.0109
+    },
+    "Standing": {
+      "baisse_r2": 0.0139,
+      "ecart_type": 0.0097
+    }
+  },
+  "erreurs": {
+    "par_tranche_de_loyer": {
+      "< 300 000": {
+        "annonces": 257,
+        "loyer_median": 250000,
+        "mae": 85084,
+        "erreur_relative_mediane_pct": 24.0,
+        "biais_moyen": 70414
+      },
+      "300 000 - 600 000": {
+        "annonces": 393,
+        "loyer_median": 450000,
+        "mae": 184895,
+        "erreur_relative_mediane_pct": 26.2,
+        "biais_moyen": 124098
+      },
+      "600 000 - 1 000 000": {
+        "annonces": 333,
+        "loyer_median": 800000,
+        "mae": 225409,
+        "erreur_relative_mediane_pct": 23.5,
+        "biais_moyen": 47471
+      },
+      "1 000 000 - 2 000 000": {
+        "annonces": 320,
+        "loyer_median": 1500000,
+        "mae": 453971,
+        "erreur_relative_mediane_pct": 27.5,
+        "biais_moyen": -290826
+      },
+      "> 2 000 000": {
+        "annonces": 106,
+        "loyer_median": 2700000,
+        "mae": 1053053,
+        "erreur_relative_mediane_pct": 29.7,
+        "biais_moyen": -997906
+      }
+    },
+    "par_quartier": {
+      "Almadies": {
+        "annonces": 246,
+        "loyer_median": 1000000,
+        "mae": 393791,
+        "erreur_relative_mediane_pct": 29.5,
+        "biais_moyen": -128203
+      },
+      "Mermoz": {
+        "annonces": 134,
+        "loyer_median": 950000,
+        "mae": 473939,
+        "erreur_relative_mediane_pct": 38.3,
+        "biais_moyen": -126420
+      },
+      "Mamelles": {
+        "annonces": 120,
+        "loyer_median": 500000,
+        "mae": 192474,
+        "erreur_relative_mediane_pct": 22.6,
+        "biais_moyen": -58934
+      },
+      "Point E": {
+        "annonces": 107,
+        "loyer_median": 1000000,
+        "mae": 312899,
+        "erreur_relative_mediane_pct": 23.0,
+        "biais_moyen": -96619
+      },
+      "Ngor": {
+        "annonces": 69,
+        "loyer_median": 750000,
+        "mae": 358203,
+        "erreur_relative_mediane_pct": 33.8,
+        "biais_moyen": -99542
+      },
+      "Fann": {
+        "annonces": 65,
+        "loyer_median": 2000000,
+        "mae": 555471,
+        "erreur_relative_mediane_pct": 21.7,
+        "biais_moyen": -127797
+      },
+      "Plateau": {
+        "annonces": 62,
+        "loyer_median": 1700000,
+        "mae": 523887,
+        "erreur_relative_mediane_pct": 28.5,
+        "biais_moyen": -142814
+      },
+      "Virage": {
+        "annonces": 55,
+        "loyer_median": 1000000,
+        "mae": 301270,
+        "erreur_relative_mediane_pct": 24.4,
+        "biais_moyen": -60567
+      },
+      "Sacré-Cœur": {
+        "annonces": 51,
+        "loyer_median": 500000,
+        "mae": 150272,
+        "erreur_relative_mediane_pct": 21.0,
+        "biais_moyen": -32606
+      },
+      "Ouakam": {
+        "annonces": 46,
+        "loyer_median": 450000,
+        "mae": 486789,
+        "erreur_relative_mediane_pct": 43.1,
+        "biais_moyen": -135740
+      },
+      "Cite Keur Gorgui": {
+        "annonces": 36,
+        "loyer_median": 650000,
+        "mae": 251946,
+        "erreur_relative_mediane_pct": 21.1,
+        "biais_moyen": -103564
+      },
+      "Yoff": {
+        "annonces": 31,
+        "loyer_median": 400000,
+        "mae": 132479,
+        "erreur_relative_mediane_pct": 25.7,
+        "biais_moyen": 2620
+      }
+    }
+  }
+}

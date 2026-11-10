@@ -1,0 +1,8 @@
+# Dependances de la chaine de traitement (en plus de celles de l'application)
+-r ../requirements.txt
+beautifulsoup4>=4.12
+requests>=2.32
+dateparser>=1.2
+python-dateutil>=2.9
+geopy>=2.4
+joblib>=1.4
